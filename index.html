@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css" /> <!-- link to a generic reset css stylesheet -->
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" /> <!-- link to the external stylesheet -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Quiz! Test your knowledge</title>
+</head>
+<body>
+    <header>
+        <h1>Code Quiz</h1>
+    </header>
+    <section class="card" id="card">
+        <div id="card-header">
+            <a id="high-score">Highscore Table</a>
+            <div id="timer">Timer</div>
+        </div>
+        <article id="quiz">
+            <form>
+                <p>Question</p>
+                <div>
+                    <input type ="radio" class="radio" id="answer1" name="answer" value="answer1">
+                    <label for ="answer1">Answer1</label>
+                    <input type ="radio" class="radio" id="answer2" name="answer" value="answer2">
+                    <label for ="answer2">Answer2</label>
+                    <input type ="radio" class="radio" id="answer3" name="answer" value="answer3">
+                    <label for ="answer3">Answer3</label>
+                    <input type ="radio" class="radio" id="answer4" name="answer" value="answer4">
+                    <label for ="answer4">Answer4</label>
+                </div>
+                <div>
+                  <button id="user-answer" type="submit">Confirm</button>
+                </div>
+              </form>
+        </article>
+        <button id="start-quiz">Start Quiz!</button>
+    </section>
+    <script type="text/javascript" src="./assets/scripts/script.js"></script>
+</body>
+</html>

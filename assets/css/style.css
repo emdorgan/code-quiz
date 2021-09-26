@@ -1,0 +1,72 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+     margin: 0;
+    padding: 0;
+}
+
+header{
+    text-align: center;
+    padding: 20px;
+    font-size: 2em;
+    margin-top: 5%;
+}
+
+#card {
+    height: 400px;
+    text-align: center;
+    max-width: 800px;
+    border: 5px solid black;
+    margin:0 auto; /* Google told me that this is a trick to center divs, VERY good to know */
+}
+
+#card-header {
+    width: 100%;
+}
+
+#high-score {
+    float: left;
+    top: 0;
+}
+#timer {
+    float: right;
+    top: 0;
+}
+button{
+    margin:0 auto;
+    padding: 5px;
+    width: 200px;
+}
+
+#quiz{
+    width: 200px;
+    height: 200px;
+    margin:0 auto;
+}
+form div{
+    display: flex;
+    flex-direction: column;
+}
+form {
+    margin-top: 20%;
+}
+
+form p {
+    font-size: 2em;
+}
+
+form button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.radio {
+    position: relative;
+    top: 13px;
+    left: 42px;
+}
