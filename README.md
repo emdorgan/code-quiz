@@ -5,8 +5,12 @@ and decreases by 10 for every wrong answer. Once the quiz is done, the final sco
 
 ## To-Do List
 
-* Finish Pseudocode
-* Look at Pass generator CSS to understand it & try to make my own box for the quiz
+* Make it so the button starts quiz by adding text elements to the question and answer, and also starts timer, and also hides start quiz button
+* Make it so that the wrong answer deducts 10s from timer
+* make it so that the correct answer loads the next question
+* After 5 question, store timer data and prompt user to enter form
+* Set up high-score table (see second set of pseudocode)
+
 
 ## Getting Started
 

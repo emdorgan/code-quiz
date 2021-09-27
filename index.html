@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" type="text/css" href="./assets/css/reset.css" /> <!-- link to a generic reset css stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> <!-- Link to bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" /> <!-- link to the external stylesheet -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Quiz! Test your knowledge</title>
@@ -15,28 +16,29 @@
     <section class="card" id="card">
         <div id="card-header">
             <a id="high-score">Highscore Table</a>
-            <div id="timer">Timer: </div>
+            <div id="timer-name">Timer: </div id="timer"><div></div>
         </div>
         <article id="quiz">
             <form>
                 <p>Question: </p>
                 <div>
                     <input type ="radio" class="radio" id="answer1" name="answer" value="answer1">
-                    <label for ="answer1">Answer1</label>
+                    <label for ="answer1"></label>
                     <input type ="radio" class="radio" id="answer2" name="answer" value="answer2">
-                    <label for ="answer2">Answer2</label>
+                    <label for ="answer2"></label>
                     <input type ="radio" class="radio" id="answer3" name="answer" value="answer3">
-                    <label for ="answer3">Answer3</label>
+                    <label for ="answer3"></label>
                     <input type ="radio" class="radio" id="answer4" name="answer" value="answer4">
-                    <label for ="answer4">Answer4</label>
+                    <label for ="answer4"></label>
                 </div>
                 <div>
-                  <button id="user-answer" type="submit">Confirm</button>
+                  <button id="user-answer" class="btn btn-primary" type="submit">Confirm</button>
                 </div>
               </form>
         </article>
-        <button id="start-quiz">Start Quiz!</button>
+        <button id="start-quiz" class="btn btn-outline-success">Start Quiz!</button>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./assets/scripts/script.js"></script>
 </body>
 </html>

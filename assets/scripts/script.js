@@ -15,3 +15,6 @@
 // convert data from objects to 2D array [key, value]
 // use sort() method to return a sorted array with the highest values first like this:.sort(([,a],[,b]) => b-a)
 // display sorted array to the user in sequential order
+
+var timer = 120;
+

@@ -34,10 +34,10 @@ header{
     top: 0;
     padding: 10px;
 }
-#timer {
+#timer-name {
     float: right;
     top: 0;
-    padding: 10px 30px 10px 10px;
+    padding: 10px 10px 10px 10px;
 }
 button{
     margin:0 auto;
@@ -47,7 +47,7 @@ button{
 
 #quiz{
     width: 200px;
-    height: 200px;
+    height: 280px;
     margin:0 auto;
 }
 form div{
@@ -55,11 +55,13 @@ form div{
     flex-direction: column;
 }
 form {
-    margin-top: 20%;
+    margin-top: 5%;
+    display: none;
 }
 
 form p {
     font-size: 2em;
+    margin-bottom: 0;
 }
 
 form button {
@@ -69,6 +71,6 @@ form button {
 
 .radio {
     position: relative;
-    top: 13px;
+    top: 18px;
     left: 42px;
 }
