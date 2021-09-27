@@ -16,5 +16,20 @@
 // use sort() method to return a sorted array with the highest values first like this:.sort(([,a],[,b]) => b-a)
 // display sorted array to the user in sequential order
 
-var timer = 120;
+var timer = 120;                                                // variable storing the timer
+var startBtn = document.getElementById('start-quiz');           // variables storing various pointers
+var quizForm = document.getElementById('quiz-form');
+var question = document.getElementById('question');             
+var answer1 = document.getElementById('answer1')
+var answer2 = document.getElementById('answer2')
+var answer3 = document.getElementById('answer3')
+var answer4 = document.getElementById('answer4')
+var userAnswer = document.getElementById('user-answer')
 
+function startQuiz(){
+    startBtn.setAttribute("style", "display: none")
+    quizForm.setAttribute("style", "display: inline")
+    // continue here, adding pointers and modifiers to populate the questions
+};
+
+startBtn.addEventListener('click', startQuiz)
