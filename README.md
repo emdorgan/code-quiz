@@ -14,7 +14,7 @@ Just press the start quiz button to start the challenge!
 
 ## Deployed Link
 
-* [See Live Site](#)
+* [See Live Site](https://emdorgan.github.io/code-quiz/)
 
 ## Screenshots/Demo
 
@@ -33,8 +33,6 @@ Just press the start quiz button to start the challenge!
 - [Link to Portfolio Site](https://emdorgan.github.io/portfolio/)
 - [Link to Github](https://github.com/emdorgan)
 - [Link to LinkedIn](https://www.linkedin.com/in/emily-dorgan/)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
