@@ -26,17 +26,17 @@ var answer2 = document.getElementById('answer2Label');
 var answer3 = document.getElementById('answer3Label');
 var answer4 = document.getElementById('answer4Label');
 var userAnswer = document.getElementById('user-answer');
+var allRadios = document.getElementsByName('answer');
+var allLabels = document.getElementById('radios').querySelectorAll('label');
+console.log(allRadios);
 
-var questionArray = ["Question 1: When I define a variable outside of any function, the scope is...",   //Array with each question
+                //Array with each question
+var questionArray = ["Question 1: When I define a variable outside of any function, the scope is...",  
                     "Question 2: Which of the following is NOT used to initialize a variable?",
                     "Question 3: Which of these comparison operators compares both value AND type?",
                     "Question 4: Name this data structure: var data = {name: data, property: stuff}",
                     "Question 5: Which method returns the size of an array?"];
 
-var answerArray = ["Infinite", "const", "==", "Object", "arr.size", ];               //Arrays with 4 answers to the question of the corresponding index
-var answer2Array = ["Full-body", "var", "||", "Array", "arr.length", ];
-var answer3Array = ["Global", "init", "!=", "Pointer", "arr.total", ];
-var answer4Array = ["Functional", "let", "===", "DOM", "arr.matey", ];
 
 var answerArray = [
     ["Infinite", "Full-body", "Global", "Functional", "Global"], 
@@ -58,11 +58,15 @@ function startQuiz(){
     startTimer();
     }
     question.textContent = questionArray[q];
-    answer1.textContent = answer1Array[q];
-    answer2.textContent = answer2Array[q];
-    answer3.textContent = answer3Array[q];
-    answer4.textContent = answer4Array[q];
-    answer3.setAttribute("value", "correct")
+        for(var i=0; i< allRadios.length; i++){;
+            allLabels.item(i).textContent = answerArray[q][i];               //Uses the .items method to get the 'index' and iterate through the nodelist just like an array
+            if(answerArray[q][i] === answerArray[q][4]){
+                allRadios.item(i).setAttribute("value", "correct") 
+            }
+            else{
+                allRadios.item(i).setAttribute("value", "incorrect") 
+            }
+        }
 
     userAnswer.addEventListener('click', startQuiz) // Function recursively calls itself on click, loads the next question
     
