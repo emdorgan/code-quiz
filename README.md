@@ -19,7 +19,7 @@ A1: Infinite A2: Full-body (A3: Global) A4: Functional
 Q2: Which of the following is NOT used to initialize a variable?
 A1: const A2: var (A3: init) A4: let
 
-Q1: Which comparison operator compares both value and type?
+Q3: Which comparison operator compares both value and type?
 A1: == A2: || A3: != (A4: ===)
 
 Q4: Name the following data structure: var data = {name: data, property: stuff}

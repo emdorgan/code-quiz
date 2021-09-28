@@ -27,6 +27,17 @@ var answer3 = document.getElementById('answer3Label');
 var answer4 = document.getElementById('answer4Label');
 var userAnswer = document.getElementById('user-answer');
 
+var questionArray = ["Question 1: When I define a variable outside of any function, the scope is...",
+                    "Question 2: Which of the following is NOT used to initialize a variable?",
+                    "Question 3: Which of these comparison operators compares both value AND type?",
+                    "Name this data structure: var data = {name: data, property: stuff}",
+                    "Which method returns the size of an array?"];
+
+var answer1Array = ["Infinite", "const", "==", "Object", "arr.size"];
+var answer2Array = ["Full-body", "var", "||", "Array", "arr.length"];
+var answer3Array = ["Global", "init", "!=", "Pointer", "arr.total"];
+var answer4Array = ["Functional", "l`et", "===", "DOM", "arr.matey"]
+
 function startQuiz(){
     startBtn.setAttribute("style", "display: none");
     quizForm.setAttribute("style", "display: inline");
@@ -41,12 +52,83 @@ function startQuiz(){
 };
 
 function checkAnswer1(){                         // Checks the current selected answer. If wrong, deduct timer time, if correct, load the next question
-    console.log(quizForm.answer.value)
-    if(quizForm.answer.value === "answer1" || quizForm.answer.value === "answer2" || quizForm.answer.value === "answer4"){
-        timer -= 10;
+    if(quizForm.answer.value === "answer1" || quizForm.answer.value === "answer2" || quizForm.answer.value === "answer4"){ 
+        timer -= 10;                                //deduct 10 points for wrong answer
+    }
+    else if(quizForm.answer.value === "answer3"){   //If the answer is right, call the next question
+        getQuestion2();
+    }
+}
+
+function getQuestion2(){
+    question.textContent = "Question 2: Which of the following is NOT used to initialize a variable?";
+    answer1.textContent = "const";
+    answer2.textContent = "var";
+    answer3.textContent = "init";
+    answer4.textContent = "let";
+    userAnswer.addEventListener('click', checkAnswer2)
+}
+
+function checkAnswer2(){                         
+    if(quizForm.answer.value === "answer1" || quizForm.answer.value === "answer2" || quizForm.answer.value === "answer4"){ 
+        timer -= 10;                                
     }
     else if(quizForm.answer.value === "answer3"){
-        getQuestion2();
+        getQuestion3();
+    }
+}
+
+function getQuestion3(){
+    question.textContent = "Question 3: Which of these comparison operators compares both value AND type?";
+    answer1.textContent = "==";
+    answer2.textContent = "||";
+    answer3.textContent = "!=";
+    answer4.textContent = "===";
+    userAnswer.addEventListener('click', checkAnswer3)
+}
+
+function checkAnswer3(){                         
+    if(quizForm.answer.value === "answer1" || quizForm.answer.value === "answer2" || quizForm.answer.value === "answer3"){ 
+        timer -= 10;                                
+    }
+    else if(quizForm.answer.value === "answer4"){
+        getQuestion4();
+    }
+}
+
+function getQuestion4(){
+    question.textContent = "Name this data structure: var data = {name: data, property: stuff}";
+    answer1.textContent = "Object";
+    answer2.textContent = "Array";
+    answer3.textContent = "Pointer";
+    answer4.textContent = "DOM";
+    userAnswer.addEventListener('click', checkAnswer4)
+}
+
+function checkAnswer4(){                         
+    if(quizForm.answer.value === "answer2" || quizForm.answer.value === "answer3" || quizForm.answer.value === "answer4"){ 
+        timer -= 10;                                
+    }
+    else if(quizForm.answer.value === "answer1"){
+        getQuestion5();
+    }
+}
+
+function getQuestion5(){
+    question.textContent = "Which method returns the size of an array?";
+    answer1.textContent = "arr.size";
+    answer2.textContent = "arr.length";
+    answer3.textContent = "arr.total";
+    answer4.textContent = "arr.matey";
+    userAnswer.addEventListener('click', checkAnswer5)
+}
+
+function checkAnswer5(){                         
+    if(quizForm.answer.value === "answer1" || quizForm.answer.value === "answer3" || quizForm.answer.value === "answer4"){ 
+        timer -= 10;                                
+    }
+    else if(quizForm.answer.value === "answer2"){
+        console.log("the end"); // placeholder for building the user submission form while I test the current functionality
     }
 }
 
