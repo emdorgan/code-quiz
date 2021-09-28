@@ -11,6 +11,22 @@ and decreases by 10 for every wrong answer. Once the quiz is done, the final sco
 * After 5 question, store timer data and prompt user to enter form
 * Set up high-score table (see second set of pseudocode)
 
+### Quiz Questions
+
+Q1: When I define a variable outside of any function, the scope is...
+A1: Infinite A2: Full-body (A3: Global) A4: Functional
+
+Q2: Which of the following is NOT used to initialize a variable?
+A1: const A2: var (A3: init) A4: let
+
+Q1: Which comparison operator compares both value and type?
+A1: == A2: || A3: != (A4: ===)
+
+Q4: Name the following data structure: var data = {name: data, property: stuff}
+(A1: Object) A2: Array A3: Pointer A4: DOM
+
+Q5: Which method returns the size of an array?
+A1: arr.size A2: (arr.length) A3: arr.total A4: arr.matey
 
 ## Getting Started
 

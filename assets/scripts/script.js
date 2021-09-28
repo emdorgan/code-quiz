@@ -17,19 +17,36 @@
 // display sorted array to the user in sequential order
 
 var timer = 120;                                                // variable storing the timer
-var startBtn = document.getElementById('start-quiz');           // variables storing various pointers
+var startBtn = document.getElementById('start-quiz');           // variables storing API pointers for ease of use
 var quizForm = document.getElementById('quiz-form');
-var question = document.getElementById('question');             
-var answer1 = document.getElementById('answer1')
-var answer2 = document.getElementById('answer2')
-var answer3 = document.getElementById('answer3')
-var answer4 = document.getElementById('answer4')
-var userAnswer = document.getElementById('user-answer')
+var question = document.getElementById('question'); 
+var timerDisplay = document.getElementById('timer');            
+var answer1 = document.getElementById('answer1');
+var answer2 = document.getElementById('answer2');
+var answer3 = document.getElementById('answer3');
+var answer4 = document.getElementById('answer4');
+var userAnswer = document.getElementById('user-answer');
 
 function startQuiz(){
-    startBtn.setAttribute("style", "display: none")
-    quizForm.setAttribute("style", "display: inline")
-    // continue here, adding pointers and modifiers to populate the questions
+    startBtn.setAttribute("style", "display: none");
+    quizForm.setAttribute("style", "display: inline");
+    question.textContent = "Question 1: When I define a variable outside of any function, the scope is...";
+    answer1.textContent = "Infinite";
+    answer2.textContent = "Full-body";
+    answer3.textContent = "Global";
+    answer4.textContent = "Functional";
+    timerDisplay.textContent = timer;
+    startTimer();
 };
+
+function startTimer(){                        // Start the timer at 120 seconds
+    var countdown = setInterval(() => {                        // fat arrow notation was auto-filled in by VS code, but it's (mostly) just a shorthand way of writing a function
+        timer--;                                // sets a 1000ms interval at which 1 is removed from timer
+        timerDisplay.textContent = timer;       // Continuously updates the display so the user sees the timer
+        if(timer <= 0){                         // If timer reaches zero (or passes zero) clear the interval.
+            clearInterval(countdown);
+        }
+    }, 1000);
+}
 
 startBtn.addEventListener('click', startQuiz)

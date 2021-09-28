@@ -46,13 +46,15 @@ button{
 }
 
 #quiz{
-    width: 200px;
+    width: 400px;
     height: 280px;
     margin:0 auto;
 }
 form div{
     display: flex;
     flex-direction: column;
+    width: 200px;
+    margin:0 auto;
 }
 form {
     margin-top: 5%;
@@ -60,7 +62,7 @@ form {
 }
 
 form p {
-    font-size: 2em;
+    font-size: 1.2em;
     margin-bottom: 0;
 }
 
