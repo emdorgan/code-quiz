@@ -26,9 +26,8 @@ var answer2 = document.getElementById('answer2Label');
 var answer3 = document.getElementById('answer3Label');
 var answer4 = document.getElementById('answer4Label');
 var userAnswer = document.getElementById('user-answer');
-var allRadios = document.getElementsByName('answer');
-var allLabels = document.getElementById('radios').querySelectorAll('label');
-console.log(allRadios);
+var allRadios = document.getElementsByName('answer');           // Nodelist of the <input>s in the quiz form
+var allLabels = document.getElementById('radios').querySelectorAll('label'); // Nodelist of the <label>s in the quiz form
 
                 //Array with each question
 var questionArray = ["Question 1: When I define a variable outside of any function, the scope is...",  
@@ -37,7 +36,7 @@ var questionArray = ["Question 1: When I define a variable outside of any functi
                     "Question 4: Name this data structure: var data = {name: data, property: stuff}",
                     "Question 5: Which method returns the size of an array?"];
 
-
+                //2D array of multiple choice answers. Each sub array is a set of 4 multiple choice possibilities and the 4th index of each sub array (which is hidden from the user) is the correct answer
 var answerArray = [
     ["Infinite", "Full-body", "Global", "Functional", "Global"], 
     ["const", "var", "init", "let", "init"],
@@ -50,117 +49,46 @@ var q = 0; // global variable that controls with set of questions and answers in
 var game = false; // checks if the game is running
 
 function startQuiz(){
-    if(!game){
-    game = true;
-    startBtn.setAttribute("style", "display: none");
-    quizForm.setAttribute("style", "display: inline");
-    timerDisplay.textContent = timer;
-    startTimer();
+    if(!game){                                                      // Checks to see if the game has started
+    game = true;                                                    // If it hasn't, set game to true (start) &
+    startBtn.setAttribute("style", "display: none");                // hide the start button &
+    quizForm.setAttribute("style", "display: inline");              // display the quiz form &
+    timerDisplay.textContent = timer;                               // display the counter to the user &
+    startTimer();                                                   // start the timer
     }
-    question.textContent = questionArray[q];
-        for(var i=0; i< allRadios.length; i++){;
-            allLabels.item(i).textContent = answerArray[q][i];               //Uses the .items method to get the 'index' and iterate through the nodelist just like an array
-            if(answerArray[q][i] === answerArray[q][4]){
-                allRadios.item(i).setAttribute("value", "correct") 
+    question.textContent = questionArray[q];                            // Sets the text content of question to the 'q' index of the questions array
+        for(var i=0; i< allRadios.length; i++){                        //For loop that iterates through the 4 multiple choice answers and adds answer corresponding to the question
+            allLabels.item(i).textContent = answerArray[q][i];          //Uses the .items method to get the 'index' and iterate through the nodelist just like an array
+            if(answerArray[q][i] === answerArray[q][4]){                //compares the sub array item to the 4th index (the answer index)
+                allRadios.item(i).setAttribute("value", "correct")      //If it's equal, set the value of the associated radio button to "correct"
             }
-            else{
-                allRadios.item(i).setAttribute("value", "incorrect") 
+            else{                                                       //If not, then set it to "incorrect" to override previous 'correct' answers
+                allRadios.item(i).setAttribute("value", "incorrect")
             }
-        }
 
-    userAnswer.addEventListener('click', startQuiz) // Function recursively calls itself on click, loads the next question
+        }
+    userAnswer.addEventListener('click', checkAnswer); // Calls a function that checks if the answer is correct
     
 };
 
-function checkAnswer1(){                         // Checks the current selected answer. If wrong, deduct timer time, if correct, load the next question
-    if(quizForm.answer.value === "answer1" || quizForm.answer.value === "answer2" || quizForm.answer.value === "answer4"){ 
-        timer -= 10;                                //deduct 10 points for wrong answer
+function checkAnswer(){
+    if(quizForm.answer.value === "correct"){        //If the user's answer is correct, increment q and call the startQuiz main function, which will load the next question
+        q++;
+        startQuiz();
     }
-    else if(quizForm.answer.value === "answer3"){   //If the answer is right, call the next question
-        getQuestion2();
+    else{                                       // If the answer is wrong, deduct 10s from the timer.
+        timer -= 10;
     }
 }
 
-// function getQuestion2(){
-//     question.textContent = "Question 2: Which of the following is NOT used to initialize a variable?";
-//     answer1.textContent = "const";
-//     answer2.textContent = "var";
-//     answer3.textContent = "init";
-//     answer4.textContent = "let";
-//     userAnswer.addEventListener('click', checkAnswer2)
-// }
-
-// function checkAnswer2(){                         
-//     if(quizForm.answer.value === "answer1" || quizForm.answer.value === "answer2" || quizForm.answer.value === "answer4"){ 
-//         timer -= 10;                                
-//     }
-//     else if(quizForm.answer.value === "answer3"){
-//         getQuestion3();
-//     }
-// }
-
-// function getQuestion3(){
-//     question.textContent = "Question 3: Which of these comparison operators compares both value AND type?";
-//     answer1.textContent = "==";
-//     answer2.textContent = "||";
-//     answer3.textContent = "!=";
-//     answer4.textContent = "===";
-//     userAnswer.addEventListener('click', checkAnswer3)
-// }
-
-// function checkAnswer3(){                         
-//     if(quizForm.answer.value === "answer1" || quizForm.answer.value === "answer2" || quizForm.answer.value === "answer3"){ 
-//         timer -= 10;                                
-//     }
-//     else if(quizForm.answer.value === "answer4"){
-//         getQuestion4();
-//     }
-// }
-
-// function getQuestion4(){
-//     question.textContent = "Name this data structure: var data = {name: data, property: stuff}";
-//     answer1.textContent = "Object";
-//     answer2.textContent = "Array";
-//     answer3.textContent = "Pointer";
-//     answer4.textContent = "DOM";
-//     userAnswer.addEventListener('click', checkAnswer4)
-// }
-
-// function checkAnswer4(){                         
-//     if(quizForm.answer.value === "answer2" || quizForm.answer.value === "answer3" || quizForm.answer.value === "answer4"){ 
-//         timer -= 10;                                
-//     }
-//     else if(quizForm.answer.value === "answer1"){
-//         getQuestion5();
-//     }
-// }
-
-// function getQuestion5(){
-//     question.textContent = "Which method returns the size of an array?";
-//     answer1.textContent = "arr.size";
-//     answer2.textContent = "arr.length";
-//     answer3.textContent = "arr.total";
-//     answer4.textContent = "arr.matey";
-//     userAnswer.addEventListener('click', checkAnswer5)
-// }
-
-// function checkAnswer5(){                         
-//     if(quizForm.answer.value === "answer1" || quizForm.answer.value === "answer3" || quizForm.answer.value === "answer4"){ 
-//         timer -= 10;                                
-//     }
-//     else if(quizForm.answer.value === "answer2"){
-//         console.log("the end"); // placeholder for building the user submission form while I test the current functionality
-//     }
-// }
-
 function startTimer(){                        // Start the timer at 120 seconds
-    var countdown = setInterval(() => {                        // fat arrow notation was auto-filled in by VS code, but it's (mostly) just a shorthand way of writing a function
-        timer--;                                // sets a 1000ms interval at which 1 is removed from timer
+    var countdown = setInterval(() => {         // fat arrow notation was auto-filled in by VS code, but it's (mostly) just a shorthand way of writing a function
+        timer--;                                // Every interval, 1 is removed from timer
         timerDisplay.textContent = timer;       // Continuously updates the display so the user sees the timer
         if(timer <= 0){                         // If timer reaches zero (or passes zero) clear the interval.
             clearInterval(countdown);
         }
-    }, 1000);
+    }, 1000);                                   // sets a 1 second interval
 }
 
 startBtn.addEventListener('click', startQuiz)
