@@ -27,28 +27,45 @@ var answer3 = document.getElementById('answer3Label');
 var answer4 = document.getElementById('answer4Label');
 var userAnswer = document.getElementById('user-answer');
 
-var questionArray = ["Question 1: When I define a variable outside of any function, the scope is...",
+var questionArray = ["Question 1: When I define a variable outside of any function, the scope is...",   //Array with each question
                     "Question 2: Which of the following is NOT used to initialize a variable?",
                     "Question 3: Which of these comparison operators compares both value AND type?",
-                    "Name this data structure: var data = {name: data, property: stuff}",
-                    "Which method returns the size of an array?"];
+                    "Question 4: Name this data structure: var data = {name: data, property: stuff}",
+                    "Question 5: Which method returns the size of an array?"];
 
-var answer1Array = ["Infinite", "const", "==", "Object", "arr.size"];
-var answer2Array = ["Full-body", "var", "||", "Array", "arr.length"];
-var answer3Array = ["Global", "init", "!=", "Pointer", "arr.total"];
-var answer4Array = ["Functional", "l`et", "===", "DOM", "arr.matey"]
+var answerArray = ["Infinite", "const", "==", "Object", "arr.size", ];               //Arrays with 4 answers to the question of the corresponding index
+var answer2Array = ["Full-body", "var", "||", "Array", "arr.length", ];
+var answer3Array = ["Global", "init", "!=", "Pointer", "arr.total", ];
+var answer4Array = ["Functional", "let", "===", "DOM", "arr.matey", ];
+
+var answerArray = [
+    ["Infinite", "Full-body", "Global", "Functional", "Global"], 
+    ["const", "var", "init", "let", "init"],
+    ["==", "||", "!=", "===", "==="],
+    ["Object", "Array", "Pointer", "DOM", "Object"],
+    ["arr.size", "arr.length", "arr.total", "arr.matey", "arr.length"]
+];
+
+var q = 0; // global variable that controls with set of questions and answers in the arrays are loaded.
+var game = false; // checks if the game is running
 
 function startQuiz(){
+    if(!game){
+    game = true;
     startBtn.setAttribute("style", "display: none");
     quizForm.setAttribute("style", "display: inline");
-    question.textContent = "Question 1: When I define a variable outside of any function, the scope is...";
-    answer1.textContent = "Infinite";
-    answer2.textContent = "Full-body";
-    answer3.textContent = "Global";
-    answer4.textContent = "Functional";
     timerDisplay.textContent = timer;
     startTimer();
-    userAnswer.addEventListener('click', checkAnswer1)
+    }
+    question.textContent = questionArray[q];
+    answer1.textContent = answer1Array[q];
+    answer2.textContent = answer2Array[q];
+    answer3.textContent = answer3Array[q];
+    answer4.textContent = answer4Array[q];
+    answer3.setAttribute("value", "correct")
+
+    userAnswer.addEventListener('click', startQuiz) // Function recursively calls itself on click, loads the next question
+    
 };
 
 function checkAnswer1(){                         // Checks the current selected answer. If wrong, deduct timer time, if correct, load the next question
@@ -60,77 +77,77 @@ function checkAnswer1(){                         // Checks the current selected 
     }
 }
 
-function getQuestion2(){
-    question.textContent = "Question 2: Which of the following is NOT used to initialize a variable?";
-    answer1.textContent = "const";
-    answer2.textContent = "var";
-    answer3.textContent = "init";
-    answer4.textContent = "let";
-    userAnswer.addEventListener('click', checkAnswer2)
-}
+// function getQuestion2(){
+//     question.textContent = "Question 2: Which of the following is NOT used to initialize a variable?";
+//     answer1.textContent = "const";
+//     answer2.textContent = "var";
+//     answer3.textContent = "init";
+//     answer4.textContent = "let";
+//     userAnswer.addEventListener('click', checkAnswer2)
+// }
 
-function checkAnswer2(){                         
-    if(quizForm.answer.value === "answer1" || quizForm.answer.value === "answer2" || quizForm.answer.value === "answer4"){ 
-        timer -= 10;                                
-    }
-    else if(quizForm.answer.value === "answer3"){
-        getQuestion3();
-    }
-}
+// function checkAnswer2(){                         
+//     if(quizForm.answer.value === "answer1" || quizForm.answer.value === "answer2" || quizForm.answer.value === "answer4"){ 
+//         timer -= 10;                                
+//     }
+//     else if(quizForm.answer.value === "answer3"){
+//         getQuestion3();
+//     }
+// }
 
-function getQuestion3(){
-    question.textContent = "Question 3: Which of these comparison operators compares both value AND type?";
-    answer1.textContent = "==";
-    answer2.textContent = "||";
-    answer3.textContent = "!=";
-    answer4.textContent = "===";
-    userAnswer.addEventListener('click', checkAnswer3)
-}
+// function getQuestion3(){
+//     question.textContent = "Question 3: Which of these comparison operators compares both value AND type?";
+//     answer1.textContent = "==";
+//     answer2.textContent = "||";
+//     answer3.textContent = "!=";
+//     answer4.textContent = "===";
+//     userAnswer.addEventListener('click', checkAnswer3)
+// }
 
-function checkAnswer3(){                         
-    if(quizForm.answer.value === "answer1" || quizForm.answer.value === "answer2" || quizForm.answer.value === "answer3"){ 
-        timer -= 10;                                
-    }
-    else if(quizForm.answer.value === "answer4"){
-        getQuestion4();
-    }
-}
+// function checkAnswer3(){                         
+//     if(quizForm.answer.value === "answer1" || quizForm.answer.value === "answer2" || quizForm.answer.value === "answer3"){ 
+//         timer -= 10;                                
+//     }
+//     else if(quizForm.answer.value === "answer4"){
+//         getQuestion4();
+//     }
+// }
 
-function getQuestion4(){
-    question.textContent = "Name this data structure: var data = {name: data, property: stuff}";
-    answer1.textContent = "Object";
-    answer2.textContent = "Array";
-    answer3.textContent = "Pointer";
-    answer4.textContent = "DOM";
-    userAnswer.addEventListener('click', checkAnswer4)
-}
+// function getQuestion4(){
+//     question.textContent = "Name this data structure: var data = {name: data, property: stuff}";
+//     answer1.textContent = "Object";
+//     answer2.textContent = "Array";
+//     answer3.textContent = "Pointer";
+//     answer4.textContent = "DOM";
+//     userAnswer.addEventListener('click', checkAnswer4)
+// }
 
-function checkAnswer4(){                         
-    if(quizForm.answer.value === "answer2" || quizForm.answer.value === "answer3" || quizForm.answer.value === "answer4"){ 
-        timer -= 10;                                
-    }
-    else if(quizForm.answer.value === "answer1"){
-        getQuestion5();
-    }
-}
+// function checkAnswer4(){                         
+//     if(quizForm.answer.value === "answer2" || quizForm.answer.value === "answer3" || quizForm.answer.value === "answer4"){ 
+//         timer -= 10;                                
+//     }
+//     else if(quizForm.answer.value === "answer1"){
+//         getQuestion5();
+//     }
+// }
 
-function getQuestion5(){
-    question.textContent = "Which method returns the size of an array?";
-    answer1.textContent = "arr.size";
-    answer2.textContent = "arr.length";
-    answer3.textContent = "arr.total";
-    answer4.textContent = "arr.matey";
-    userAnswer.addEventListener('click', checkAnswer5)
-}
+// function getQuestion5(){
+//     question.textContent = "Which method returns the size of an array?";
+//     answer1.textContent = "arr.size";
+//     answer2.textContent = "arr.length";
+//     answer3.textContent = "arr.total";
+//     answer4.textContent = "arr.matey";
+//     userAnswer.addEventListener('click', checkAnswer5)
+// }
 
-function checkAnswer5(){                         
-    if(quizForm.answer.value === "answer1" || quizForm.answer.value === "answer3" || quizForm.answer.value === "answer4"){ 
-        timer -= 10;                                
-    }
-    else if(quizForm.answer.value === "answer2"){
-        console.log("the end"); // placeholder for building the user submission form while I test the current functionality
-    }
-}
+// function checkAnswer5(){                         
+//     if(quizForm.answer.value === "answer1" || quizForm.answer.value === "answer3" || quizForm.answer.value === "answer4"){ 
+//         timer -= 10;                                
+//     }
+//     else if(quizForm.answer.value === "answer2"){
+//         console.log("the end"); // placeholder for building the user submission form while I test the current functionality
+//     }
+// }
 
 function startTimer(){                        // Start the timer at 120 seconds
     var countdown = setInterval(() => {                        // fat arrow notation was auto-filled in by VS code, but it's (mostly) just a shorthand way of writing a function
