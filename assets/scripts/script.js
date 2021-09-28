@@ -21,10 +21,10 @@ var startBtn = document.getElementById('start-quiz');           // variables sto
 var quizForm = document.getElementById('quiz-form');
 var question = document.getElementById('question'); 
 var timerDisplay = document.getElementById('timer');            
-var answer1 = document.getElementById('answer1');
-var answer2 = document.getElementById('answer2');
-var answer3 = document.getElementById('answer3');
-var answer4 = document.getElementById('answer4');
+var answer1 = document.getElementById('answer1Label');
+var answer2 = document.getElementById('answer2Label');
+var answer3 = document.getElementById('answer3Label');
+var answer4 = document.getElementById('answer4Label');
 var userAnswer = document.getElementById('user-answer');
 
 function startQuiz(){
@@ -37,7 +37,18 @@ function startQuiz(){
     answer4.textContent = "Functional";
     timerDisplay.textContent = timer;
     startTimer();
+    userAnswer.addEventListener('click', checkAnswer1)
 };
+
+function checkAnswer1(){                         // Checks the current selected answer. If wrong, deduct timer time, if correct, load the next question
+    console.log(quizForm.answer.value)
+    if(quizForm.answer.value === "answer1" || quizForm.answer.value === "answer2" || quizForm.answer.value === "answer4"){
+        timer -= 10;
+    }
+    else if(quizForm.answer.value === "answer3"){
+        getQuestion2();
+    }
+}
 
 function startTimer(){                        // Start the timer at 120 seconds
     var countdown = setInterval(() => {                        // fat arrow notation was auto-filled in by VS code, but it's (mostly) just a shorthand way of writing a function
