@@ -20,8 +20,13 @@ Just press the start quiz button to start the challenge!
 
 * [See Live Site](https://emdorgan.github.io/code-quiz/)
 
-## Screenshots/Demo
+## Screenshots
 
+![start](screenshots/start.png)
+![Question example](screenshots/q1.png)
+![you lost](screenshots/timeup.png)
+![you won!](screenshots/youwin.png)
+![High Score table](screenshots/highscores.png)
 
 ## Built With
 
