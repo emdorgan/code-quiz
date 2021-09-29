@@ -21,21 +21,15 @@ var cardPointer = document.getElementById('quiz');
 var quizForm = document.getElementById('quiz-form');
 var question = document.getElementById('question'); 
 var timerDisplay = document.getElementById('timer');            
-var answer1 = document.getElementById('answer1Label');
-var answer2 = document.getElementById('answer2Label');
-var answer3 = document.getElementById('answer3Label');
-var answer4 = document.getElementById('answer4Label');
 var userAnswer = document.getElementById('user-answer');
 var highScoreForm = document.getElementById('high-score-form');
+var highScoreBtn = document.getElementById('high-score');
+
 var allRadios = document.getElementsByName('answer');                       // Nodelist of the <input>s in the quiz form
 var allLabels = document.getElementById('radios').querySelectorAll('label'); // Nodelist of the <label>s in the quiz form
 
-
 var endScreenHeader = document.createElement("h2");                         // All APIs for the dynamically generated end screen 
 var endScreen = document.createElement('p');
-var endScreenInput = document.createElement('input');
-var endScreenLabel = document.createElement('label');
-var endScreenBtn = document.createElement('button');
 var restartBtn = document.createElement('button');
 
 restartBtn.setAttribute('class', 'btn btn-outline-success');                // set bootstrapping for the restart btn
@@ -56,6 +50,11 @@ var answerArray = [
     ["Object", "Array", "Pointer", "DOM", "Object"],
     ["arr.size", "arr.length", "arr.total", "arr.matey", "arr.length"]
 ];
+
+// var allHighScores = {...localStorage};                              // fetches all the data from local storage
+// console.log(Object.keys(allHighScores));
+// console.log(Object.values(allHighScores));
+// console.log(allHighScores);
 
 var countdown;                                                      // initializing countdown function variable globally for scope
 var timer = 120;                                                    // variable storing the timer
@@ -97,12 +96,12 @@ function endGame(win){                                          // Function serv
     quizForm.setAttribute("style", "display: none");
     clearInterval(countdown);
     if(win){
-        highScoreForm.append(endScreenHeader);
-        highScoreForm.append(endScreen);
-        highScoreForm.setAttribute("style", "display: inline");
+        cardPointer.append(endScreenHeader);
+        cardPointer.append(endScreen);
         playerScore = timer;
         endScreenHeader.textContent = "You Win!!";
         endScreen.textContent = "Your Score is "+ timer;
+        highScoreForm.setAttribute("style", "display: inline");
         
     }
     else{
@@ -145,7 +144,41 @@ function postScore(){
     location.reload();
 }
 
-startBtn.addEventListener('click', startQuiz)       // Event listener for the 'start quiz' button which runs the main script
-restartBtn.addEventListener('click', function(){    // Event listener for the restart button which reloads the page
+function loadHighScoreTable(){
+    var allHighScores = {...localStorage};  // Uses the spread notation to fetch an object of all local storage with each 'name: score'
+    var orderedHighScores = [];
+    for (var scores in allHighScores) {
+        orderedHighScores.push([scores, allHighScores[scores]]);
+    }
+
+    orderedHighScores.sort(function(a, b) {
+        return a[1] - b[1];
+    });
+    console.log(orderedHighScores);
+    var highScoreNames = Object.keys(orderedHighScores);        // Stores an array of all high-score names
+    var highScoreValues = Object.values(orderedHighScores);     // Stores an array of all high-score values
+    console.log(highScoreNames);
+    console.log(highScoreValues);
+    startBtn.setAttribute("style", "display: none");
+    highScoreBtn.setAttribute("style", "display: none");
+    endScreenHeader.textContent = "High Scores";
+    cardPointer.append(endScreenHeader);
+    for(var i = orderedHighScores.length-1; i >= 0; i--){
+        if(i < 6){
+        var j = document.createElement('p');
+        j.textContent = "Name: " + orderedHighScores[i][0] + " - Score: " + orderedHighScores[i][1];
+        j.setAttribute('class', 'border m1 rounded border-success');
+        cardPointer.append(j);
+        }
+    }
+    console.log(allHighScores);
+    restartBtn.textContent = "Go back";
+    cardPointer.append(restartBtn);
+
+}
+
+highScoreBtn.addEventListener('click', loadHighScoreTable);
+startBtn.addEventListener('click', startQuiz);       // Event listener for the 'start quiz' button which runs the main script
+restartBtn.addEventListener('click', function(){    // Event listener for the restart button (or the go back button) which reloads the page
     location.reload();
-})
+});
