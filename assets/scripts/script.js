@@ -17,7 +17,7 @@
 // display sorted array to the user in sequential order
 
 var startBtn = document.getElementById('start-quiz');           // variables storing API pointers for ease of use
-var endScreenPointer = document.getElementById('quiz');
+var cardPointer = document.getElementById('quiz');
 var quizForm = document.getElementById('quiz-form');
 var question = document.getElementById('question'); 
 var timerDisplay = document.getElementById('timer');            
@@ -36,6 +36,11 @@ var endScreen = document.createElement('p');
 var endScreenWin = document.createElement('form');
 var endScreenInput = document.createElement('input');
 var endScreenLabel = document.createElement('label');
+var endScreenBtn = document.createElement('button');
+var restartBtn = document.createElement('button');
+
+restartBtn.setAttribute('class', 'btn btn-outline-success');                // set bootstrapping for the restart btn
+restartBtn.setAttribute('type', 'button');                                  // set type attribute for the restart btn
 
                 //Array with each question
 var questionArray = ["Question 1: When I define a variable outside of any function, the scope is...",  
@@ -92,10 +97,18 @@ function endGame(win){                                          // Function serv
     game = false;
     quizForm.setAttribute("style", "display: none");
     clearInterval(countdown);
+    cardPointer.append(endScreenHeader);
+    cardPointer.append(endScreen)
     if(win){
         playerScore = timer;
+        endScreenHeader.textContent = "You Win!!";
+        endScreen.textContent = "Enter your name to be placed on the highscores:";
     }
     else{
+        endScreenHeader.textContent = "Time's up!";
+        endScreen.textContent = "Better luck next time!";
+        restartBtn.textContent = "Restart";
+        cardPointer.append(restartBtn);
 
     }
 };
@@ -124,3 +137,6 @@ function startTimer(){                        // Start the timer at 120 seconds
 }
 
 startBtn.addEventListener('click', startQuiz)
+restartBtn.addEventListener('click', function(){
+    location.reload();
+})
