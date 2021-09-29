@@ -92,12 +92,11 @@ function endGame(win){                                          // Function serv
     quizForm.setAttribute("style", "display: none");
     clearInterval(countdown);
     if(win){
-        cardPointer.append(endScreenHeader);
-        cardPointer.append(endScreen);
-        playerScore = timer;
         endScreenHeader.textContent = "You Win!!";
         endScreen.textContent = "Your Score is "+ timer;
-        highScoreBtn.setAttribute("style", "display: none");
+        document.getElementById('win').append(endScreenHeader);
+        document.getElementById('win').append(endScreen);
+        playerScore = timer;
         highScoreForm.setAttribute("style", "display: inline");
         
     }
@@ -150,17 +149,19 @@ function loadHighScoreTable(){
     orderedHighScores.sort(function(a, b) {             // uses array.sort method to sort the score values in ascending order
         return a[1] - b[1];
     });
+    console.log(orderedHighScores);
     startBtn.setAttribute("style", "display: none");        //  Hides the start button
     highScoreBtn.setAttribute("style", "display: none");    //  hides the highscore button
-    endScreenHeader.textContent = "High Scores";            
+    endScreenHeader.textContent = "High Scores";   
+    console.log(allHighScores);          
     cardPointer.append(endScreenHeader);                    // append the h2 tag that got text filled with "high scores"
     var k = 1                                               // Starts a counter at 1 which will add a number to each player on the highscore table
     for(var i = orderedHighScores.length-1; i >= 0; i--){   // iterates through the array backwards to reverse the order and list highest first
-        if(i < 5){                                          // caps the max number of high score players at 5
+        if(k < 6){                                          // caps the max number of high score players at 5
             var j = document.createElement('p');            // initializes an API method that makes a p element
             j.textContent = k +": Name: " + orderedHighScores[i][0] + " - Score: " + orderedHighScores[i][1];       //adds the player name and score to that p element 
             j.setAttribute('class', 'border m1 rounded border-success');                            // applies bootstrap styling
-            cardPointer.append(j);                                                  //appends the p element to the highscore table
+            cardPointer.append(j);                                                 //appends the p element to the highscore table
             k++;                                                                    //increments player number
         }
     }
