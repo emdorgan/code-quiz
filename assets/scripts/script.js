@@ -90,23 +90,23 @@ function startQuiz(){
 function endGame(win){                                          // Function serving as the end game that accepts a boolean value to indicate if the player won or lose
     game = false;
     quizForm.setAttribute("style", "display: none");
-    clearInterval(countdown);
-    document.getElementById('timer-name').setAttribute("style", "display: none");
+    clearInterval(countdown);                                   // Stops the timer effect
+    document.getElementById('timer-name').setAttribute("style", "display: none");   // hides the timer
     if(win){
-        endScreenHeader.textContent = "You Win!!";
-        endScreen.textContent = "Your Score is "+ timer;
-        document.getElementById('win').append(endScreenHeader);
+        endScreenHeader.textContent = "You Win!!";                                      //if the functions was called with a value of true, display all the You win! stuff
+        endScreen.textContent = "Your Score is "+ timer;                                // display score as value remaining on timer
+        document.getElementById('win').append(endScreenHeader);                         //append the you win and score messages
         document.getElementById('win').append(endScreen);
-        playerScore = timer;
-        highScoreForm.setAttribute("style", "display: inline");
+        playerScore = timer;                                                            // sets the player score equal to the timer
+        highScoreForm.setAttribute("style", "display: inline");                         //unhide the high score submission form
         
     }
     else{
-        cardPointer.append(endScreenHeader);
-        cardPointer.append(endScreen)
-        endScreenHeader.textContent = "Time's up!";
+        endScreenHeader.textContent = "Time's up!";                                     // puts text in three DOM elements
         endScreen.textContent = "Better luck next time!";
         restartBtn.textContent = "Restart";
+        cardPointer.append(endScreenHeader);                                            //appends the three DOM elements to create the 'Time's up!' screen
+        cardPointer.append(endScreen)
         cardPointer.append(restartBtn);
 
     }
@@ -119,9 +119,9 @@ function checkAnswer(){
     }
     else{                                       // If the answer is wrong, deduct 10s from the timer.
         timer -= 10;
-        document.getElementById('user-answer').setAttribute("class", "btn btn-danger")
+        document.getElementById('user-answer').setAttribute("class", "btn btn-danger")          //changes button color to red to give visual feedback
         var flashRed = setTimeout(function(){
-            document.getElementById('user-answer').setAttribute("class", "btn btn-primary")
+            document.getElementById('user-answer').setAttribute("class", "btn btn-primary")     // changes it back after 1/4th of a second to create a 'flash red' effect
         }, 250)
     }
 }
