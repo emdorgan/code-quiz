@@ -91,6 +91,7 @@ function endGame(win){                                          // Function serv
     game = false;
     quizForm.setAttribute("style", "display: none");
     clearInterval(countdown);
+    document.getElementById('timer-name').setAttribute("style", "display: none");
     if(win){
         endScreenHeader.textContent = "You Win!!";
         endScreen.textContent = "Your Score is "+ timer;
@@ -118,6 +119,10 @@ function checkAnswer(){
     }
     else{                                       // If the answer is wrong, deduct 10s from the timer.
         timer -= 10;
+        document.getElementById('user-answer').setAttribute("class", "btn btn-danger")
+        var flashRed = setTimeout(function(){
+            document.getElementById('user-answer').setAttribute("class", "btn btn-primary")
+        }, 250)
     }
 }
 
@@ -140,10 +145,11 @@ function postScore(){                               // Stores the user input as 
 }
 
 function loadHighScoreTable(){
+    document.getElementById('timer-name').setAttribute("style", "display: none");
     var allHighScores = {...localStorage};  // Uses the spread notation to fetch an object of all local storage with each 'name: score' properties
     var orderedHighScores = [];
     for (var scores in allHighScores) {                 // For... in loop to iterate through the object properties and deconstruct into an array of [key, value] arrays
-        orderedHighScores.push([scores, allHighScores[scores]]);    
+        orderedHighScores.push([scores, allHighScores[scores]]);
     }
 
     orderedHighScores.sort(function(a, b) {             // uses array.sort method to sort the score values in ascending order
