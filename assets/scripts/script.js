@@ -22,8 +22,8 @@ var quizForm = document.getElementById('quiz-form');
 var question = document.getElementById('question'); 
 var timerDisplay = document.getElementById('timer');            
 var userAnswer = document.getElementById('user-answer');
-var highScoreForm = document.getElementById('high-score-form');
-var highScoreBtn = document.getElementById('high-score');
+var highScoreForm = document.getElementById('high-score-form');             // this is not a good name for this variable, since i use it for 2 purposes
+var highScoreBtn = document.getElementById('high-score');                   
 
 var allRadios = document.getElementsByName('answer');                       // Nodelist of the <input>s in the quiz form
 var allLabels = document.getElementById('radios').querySelectorAll('label'); // Nodelist of the <label>s in the quiz form
@@ -59,6 +59,7 @@ var playerScore;
 
 function startQuiz(){
     if(!game){                                                      // Checks to see if the game has started
+    highScoreBtn.setAttribute("style", "display: none");            // Hides high-score btn once the game starts
     game = true;                                                    // If it hasn't, set game to true (start) &
     q = 0;                                                          // Reset q variable to 0 &
     timer = 120;                                                    // Reset timer to 120 &
@@ -96,6 +97,7 @@ function endGame(win){                                          // Function serv
         playerScore = timer;
         endScreenHeader.textContent = "You Win!!";
         endScreen.textContent = "Your Score is "+ timer;
+        highScoreBtn.setAttribute("style", "display: none");
         highScoreForm.setAttribute("style", "display: inline");
         
     }
@@ -135,7 +137,7 @@ function startTimer(){                        // Start the timer at 120 seconds
 
 function postScore(){                               // Stores the user input as key and the player score as value in localStorage
     localStorage.setItem(highScoreForm.pname.value, playerScore);
-    location.reload();                                  // reloads the page to restart the quiz for the user
+    location.reload();                                  // reloads the page to restart the quiz for the user to try again or access highscores.
 }
 
 function loadHighScoreTable(){
@@ -150,7 +152,7 @@ function loadHighScoreTable(){
     });
     startBtn.setAttribute("style", "display: none");        //  Hides the start button
     highScoreBtn.setAttribute("style", "display: none");    //  hides the highscore button
-    endScreenHeader.textContent = "High Scores";         
+    endScreenHeader.textContent = "High Scores";            
     cardPointer.append(endScreenHeader);                    // append the h2 tag that got text filled with "high scores"
     var k = 1                                               // Starts a counter at 1 which will add a number to each player on the highscore table
     for(var i = orderedHighScores.length-1; i >= 0; i--){   // iterates through the array backwards to reverse the order and list highest first

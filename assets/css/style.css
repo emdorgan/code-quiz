@@ -22,6 +22,7 @@ header{
     text-align: center;
     max-width: 800px;
     margin:0 auto; /* Google told me that this is a trick to center divs, VERY good to know */
+    background-color: rgb(5, 0, 46);
 }
 
 #card-header {
