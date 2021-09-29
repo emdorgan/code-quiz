@@ -51,11 +51,6 @@ var answerArray = [
     ["arr.size", "arr.length", "arr.total", "arr.matey", "arr.length"]
 ];
 
-// var allHighScores = {...localStorage};                              // fetches all the data from local storage
-// console.log(Object.keys(allHighScores));
-// console.log(Object.values(allHighScores));
-// console.log(allHighScores);
-
 var countdown;                                                      // initializing countdown function variable globally for scope
 var timer = 120;                                                    // variable storing the timer
 var q = 0;                                                          // global variable that controls with set of questions and answers in the arrays are loaded.
@@ -138,42 +133,37 @@ function startTimer(){                        // Start the timer at 120 seconds
     }, 1000);                                   // sets a 1 second interval
 }
 
-function postScore(){
-    console.log(highScoreForm.pname.value);
+function postScore(){                               // Stores the user input as key and the player score as value in localStorage
     localStorage.setItem(highScoreForm.pname.value, playerScore);
-    location.reload();
+    location.reload();                                  // reloads the page to restart the quiz for the user
 }
 
 function loadHighScoreTable(){
-    var allHighScores = {...localStorage};  // Uses the spread notation to fetch an object of all local storage with each 'name: score'
+    var allHighScores = {...localStorage};  // Uses the spread notation to fetch an object of all local storage with each 'name: score' properties
     var orderedHighScores = [];
-    for (var scores in allHighScores) {
-        orderedHighScores.push([scores, allHighScores[scores]]);
+    for (var scores in allHighScores) {                 // For... in loop to iterate through the object properties and deconstruct into an array of [key, value] arrays
+        orderedHighScores.push([scores, allHighScores[scores]]);    
     }
 
-    orderedHighScores.sort(function(a, b) {
+    orderedHighScores.sort(function(a, b) {             // uses array.sort method to sort the score values in ascending order
         return a[1] - b[1];
     });
-    console.log(orderedHighScores);
-    var highScoreNames = Object.keys(orderedHighScores);        // Stores an array of all high-score names
-    var highScoreValues = Object.values(orderedHighScores);     // Stores an array of all high-score values
-    console.log(highScoreNames);
-    console.log(highScoreValues);
-    startBtn.setAttribute("style", "display: none");
-    highScoreBtn.setAttribute("style", "display: none");
-    endScreenHeader.textContent = "High Scores";
-    cardPointer.append(endScreenHeader);
-    for(var i = orderedHighScores.length-1; i >= 0; i--){
-        if(i < 6){
-        var j = document.createElement('p');
-        j.textContent = "Name: " + orderedHighScores[i][0] + " - Score: " + orderedHighScores[i][1];
-        j.setAttribute('class', 'border m1 rounded border-success');
-        cardPointer.append(j);
+    startBtn.setAttribute("style", "display: none");        //  Hides the start button
+    highScoreBtn.setAttribute("style", "display: none");    //  hides the highscore button
+    endScreenHeader.textContent = "High Scores";         
+    cardPointer.append(endScreenHeader);                    // append the h2 tag that got text filled with "high scores"
+    var k = 1                                               // Starts a counter at 1 which will add a number to each player on the highscore table
+    for(var i = orderedHighScores.length-1; i >= 0; i--){   // iterates through the array backwards to reverse the order and list highest first
+        if(i < 5){                                          // caps the max number of high score players at 5
+            var j = document.createElement('p');            // initializes an API method that makes a p element
+            j.textContent = k +": Name: " + orderedHighScores[i][0] + " - Score: " + orderedHighScores[i][1];       //adds the player name and score to that p element 
+            j.setAttribute('class', 'border m1 rounded border-success');                            // applies bootstrap styling
+            cardPointer.append(j);                                                  //appends the p element to the highscore table
+            k++;                                                                    //increments player number
         }
     }
-    console.log(allHighScores);
-    restartBtn.textContent = "Go back";
-    cardPointer.append(restartBtn);
+    restartBtn.textContent = "Go back";                                         
+    cardPointer.append(restartBtn);                         // I resused the restart button dynamic element since the "go back" button is functionally identical
 
 }
 
