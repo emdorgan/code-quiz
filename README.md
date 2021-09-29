@@ -28,7 +28,7 @@ Just press the start quiz button to start the challenge!
 * [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
 * [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 * [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-* [Bootstrap](https://getbootstrap.com/);
+* [Bootstrap](https://getbootstrap.com/)
 
 
 ## Authors

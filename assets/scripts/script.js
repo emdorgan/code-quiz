@@ -22,7 +22,7 @@ var quizForm = document.getElementById('quiz-form');
 var question = document.getElementById('question'); 
 var timerDisplay = document.getElementById('timer');            
 var userAnswer = document.getElementById('user-answer');
-var highScoreForm = document.getElementById('high-score-form');             // this is not a good name for this variable, since i use it for 2 purposes
+var highScoreForm = document.getElementById('high-score-form');    
 var highScoreBtn = document.getElementById('high-score');                   
 
 var allRadios = document.getElementsByName('answer');                       // Nodelist of the <input>s in the quiz form
@@ -104,10 +104,11 @@ function endGame(win){                                          // Function serv
     else{
         endScreenHeader.textContent = "Time's up!";                                     // puts text in three DOM elements
         endScreen.textContent = "Better luck next time!";
-        restartBtn.textContent = "Restart";
-        cardPointer.append(endScreenHeader);                                            //appends the three DOM elements to create the 'Time's up!' screen
-        cardPointer.append(endScreen)
-        cardPointer.append(restartBtn);
+        document.getElementById('win').append(endScreenHeader);                         //append the you win and score messages
+        document.getElementById('win').append(endScreen);
+        playerScore = timer;                                                            // sets the player score equal to the timer
+        highScoreForm.setAttribute("style", "display: inline");                         //unhide the high score submission form
+        
 
     }
 };
@@ -158,8 +159,7 @@ function loadHighScoreTable(){
     console.log(orderedHighScores);
     startBtn.setAttribute("style", "display: none");        //  Hides the start button
     highScoreBtn.setAttribute("style", "display: none");    //  hides the highscore button
-    endScreenHeader.textContent = "High Scores";   
-    console.log(allHighScores);          
+    endScreenHeader.textContent = "High Scores";            
     cardPointer.append(endScreenHeader);                    // append the h2 tag that got text filled with "high scores"
     var k = 1                                               // Starts a counter at 1 which will add a number to each player on the highscore table
     for(var i = orderedHighScores.length-1; i >= 0; i--){   // iterates through the array backwards to reverse the order and list highest first
@@ -176,7 +176,7 @@ function loadHighScoreTable(){
 
 }
 
-highScoreBtn.addEventListener('click', loadHighScoreTable);
+highScoreBtn.addEventListener('click', loadHighScoreTable);     //event listener for loading the highscore screen
 startBtn.addEventListener('click', startQuiz);       // Event listener for the 'start quiz' button which runs the main script
 restartBtn.addEventListener('click', function(){    // Event listener for the restart button (or the go back button) which reloads the page
     location.reload();
