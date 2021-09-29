@@ -16,8 +16,8 @@
 // use sort() method to return a sorted array with the highest values first like this:.sort(([,a],[,b]) => b-a)
 // display sorted array to the user in sequential order
 
-var timer = 120;                                                // variable storing the timer
 var startBtn = document.getElementById('start-quiz');           // variables storing API pointers for ease of use
+var endScreenPointer = document.getElementById('quiz');
 var quizForm = document.getElementById('quiz-form');
 var question = document.getElementById('question'); 
 var timerDisplay = document.getElementById('timer');            
@@ -26,8 +26,16 @@ var answer2 = document.getElementById('answer2Label');
 var answer3 = document.getElementById('answer3Label');
 var answer4 = document.getElementById('answer4Label');
 var userAnswer = document.getElementById('user-answer');
-var allRadios = document.getElementsByName('answer');           // Nodelist of the <input>s in the quiz form
+
+var allRadios = document.getElementsByName('answer');                       // Nodelist of the <input>s in the quiz form
 var allLabels = document.getElementById('radios').querySelectorAll('label'); // Nodelist of the <label>s in the quiz form
+
+
+var endScreenHeader = document.createElement("h2");                         // All APIs for the dynamically generated end screen 
+var endScreen = document.createElement('p');
+var endScreenWin = document.createElement('form');
+var endScreenInput = document.createElement('input');
+var endScreenLabel = document.createElement('label');
 
                 //Array with each question
 var questionArray = ["Question 1: When I define a variable outside of any function, the scope is...",  
@@ -45,30 +53,51 @@ var answerArray = [
     ["arr.size", "arr.length", "arr.total", "arr.matey", "arr.length"]
 ];
 
-var q = 0; // global variable that controls with set of questions and answers in the arrays are loaded.
-var game = false; // checks if the game is running
+var countdown;                                                      // initializing countdown function variable globally for scope
+var timer = 120;                                                    // variable storing the timer
+var q = 0;                                                          // global variable that controls with set of questions and answers in the arrays are loaded.
+var game = false;                                                   // checks if the game is running
+var playerScore;
 
 function startQuiz(){
     if(!game){                                                      // Checks to see if the game has started
     game = true;                                                    // If it hasn't, set game to true (start) &
+    q = 0;                                                          // Reset q variable to 0 &
+    timer = 120;                                                    // Reset timer to 120 &
     startBtn.setAttribute("style", "display: none");                // hide the start button &
     quizForm.setAttribute("style", "display: inline");              // display the quiz form &
     timerDisplay.textContent = timer;                               // display the counter to the user &
     startTimer();                                                   // start the timer
     }
-    question.textContent = questionArray[q];                            // Sets the text content of question to the 'q' index of the questions array
-        for(var i=0; i< allRadios.length; i++){                        //For loop that iterates through the 4 multiple choice answers and adds answer corresponding to the question
-            allLabels.item(i).textContent = answerArray[q][i];          //Uses the .items method to get the 'index' and iterate through the nodelist just like an array
-            if(answerArray[q][i] === answerArray[q][4]){                //compares the sub array item to the 4th index (the answer index)
-                allRadios.item(i).setAttribute("value", "correct")      //If it's equal, set the value of the associated radio button to "correct"
-            }
-            else{                                                       //If not, then set it to "incorrect" to override previous 'correct' answers
-                allRadios.item(i).setAttribute("value", "incorrect")
-            }
+    if(q < questionArray.length){                                          // Checks if the game is still active (i.e. q is less than the # of questions AND the timer is greater than zero)
+        question.textContent = questionArray[q];                            // Sets the text content of question to the 'q' index of the questions array
+            for(var i=0; i< allRadios.length; i++){                        //For loop that iterates through the 4 multiple choice answers and adds answer corresponding to the question
+                allLabels.item(i).textContent = answerArray[q][i];          //Uses the .items method to get the 'index' and iterate through the nodelist just like an array
+                if(answerArray[q][i] === answerArray[q][4]){                //compares the sub array item to the 4th index (the answer index)
+                    allRadios.item(i).setAttribute("value", "correct")      //If it's equal, set the value of the associated radio button to "correct"
+                }
+                else{                                                       //If not, then set it to "incorrect" to override previous 'correct' answers
+                    allRadios.item(i).setAttribute("value", "incorrect")
+                }
 
-        }
-    userAnswer.addEventListener('click', checkAnswer); // Calls a function that checks if the answer is correct
-    
+            }
+        userAnswer.addEventListener('click', checkAnswer); // Calls a function that checks if the answer is correct
+    }
+    else{                                                               // If q is ever greater or equal to the number of questions, the the game is over
+        endGame(true);                                                  // the player has 'won' (i.e. made it to the end before the timer ran out) so the endGame function is called with a true value
+    }
+};
+
+function endGame(win){                                          // Function serving as the end game that accepts a boolean value to indicate if the player won or lose
+    game = false;
+    quizForm.setAttribute("style", "display: none");
+    clearInterval(countdown);
+    if(win){
+        playerScore = timer;
+    }
+    else{
+
+    }
 };
 
 function checkAnswer(){
@@ -82,11 +111,14 @@ function checkAnswer(){
 }
 
 function startTimer(){                        // Start the timer at 120 seconds
-    var countdown = setInterval(() => {         // fat arrow notation was auto-filled in by VS code, but it's (mostly) just a shorthand way of writing a function
+    countdown = setInterval(() => {         // fat arrow notation was auto-filled in by VS code, but it's (mostly) just a shorthand way of writing a function
         timer--;                                // Every interval, 1 is removed from timer
         timerDisplay.textContent = timer;       // Continuously updates the display so the user sees the timer
-        if(timer <= 0){                         // If timer reaches zero (or passes zero) clear the interval.
-            clearInterval(countdown);
+        if(timer <= 0){                         // If timer reaches zero (or passes zero in case the player answers wrong with less than 10 seconds remaining) then
+            clearInterval(countdown);           //  clear the interval &
+            timer = 0;                          // set the timer to 0 (to avoid negatives showing up) &
+            timerDisplay.textContent = timer;
+            endGame(false);                     // call the endGame function with a value of false indicating the player lost the game
         }
     }, 1000);                                   // sets a 1 second interval
 }

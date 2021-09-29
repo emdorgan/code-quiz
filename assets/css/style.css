@@ -21,7 +21,6 @@ header{
     height: 400px;
     text-align: center;
     max-width: 800px;
-    border: 5px solid black;
     margin:0 auto; /* Google told me that this is a trick to center divs, VERY good to know */
 }
 
@@ -46,9 +45,10 @@ button{
 }
 
 #quiz{
-    width: 400px;
+    width: 500px;
     height: 280px;
     margin:0 auto;
+    padding: 60px;
 }
 form div{
     display: flex;
