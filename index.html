@@ -34,7 +34,12 @@
                 <div>
                   <button id="user-answer" class="btn btn-primary" type="button">Confirm</button>
                 </div>
-              </form>
+            </form>
+            <form id="high-score-form">
+                <label for='pname'>Enter your name:</label></br>
+                <input type='text' name='pname' id='pname'></input></br>
+                <button type='button' class="btn btn-primary" onclick='postScore()'>submit</button>
+            </form>
         </article>
         <button id="start-quiz" class="btn btn-outline-success">Start Quiz!</button>
     </section>

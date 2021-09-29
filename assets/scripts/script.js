@@ -26,14 +26,13 @@ var answer2 = document.getElementById('answer2Label');
 var answer3 = document.getElementById('answer3Label');
 var answer4 = document.getElementById('answer4Label');
 var userAnswer = document.getElementById('user-answer');
-
+var highScoreForm = document.getElementById('high-score-form');
 var allRadios = document.getElementsByName('answer');                       // Nodelist of the <input>s in the quiz form
 var allLabels = document.getElementById('radios').querySelectorAll('label'); // Nodelist of the <label>s in the quiz form
 
 
 var endScreenHeader = document.createElement("h2");                         // All APIs for the dynamically generated end screen 
 var endScreen = document.createElement('p');
-var endScreenWin = document.createElement('form');
 var endScreenInput = document.createElement('input');
 var endScreenLabel = document.createElement('label');
 var endScreenBtn = document.createElement('button');
@@ -79,10 +78,10 @@ function startQuiz(){
             for(var i=0; i< allRadios.length; i++){                        //For loop that iterates through the 4 multiple choice answers and adds answer corresponding to the question
                 allLabels.item(i).textContent = answerArray[q][i];          //Uses the .items method to get the 'index' and iterate through the nodelist just like an array
                 if(answerArray[q][i] === answerArray[q][4]){                //compares the sub array item to the 4th index (the answer index)
-                    allRadios.item(i).setAttribute("value", "correct")      //If it's equal, set the value of the associated radio button to "correct"
+                    allRadios.item(i).setAttribute("value", "correct");      //If it's equal, set the value of the associated radio button to "correct"
                 }
                 else{                                                       //If not, then set it to "incorrect" to override previous 'correct' answers
-                    allRadios.item(i).setAttribute("value", "incorrect")
+                    allRadios.item(i).setAttribute("value", "incorrect");
                 }
 
             }
@@ -97,14 +96,18 @@ function endGame(win){                                          // Function serv
     game = false;
     quizForm.setAttribute("style", "display: none");
     clearInterval(countdown);
-    cardPointer.append(endScreenHeader);
-    cardPointer.append(endScreen)
     if(win){
+        highScoreForm.append(endScreenHeader);
+        highScoreForm.append(endScreen);
+        highScoreForm.setAttribute("style", "display: inline");
         playerScore = timer;
         endScreenHeader.textContent = "You Win!!";
-        endScreen.textContent = "Enter your name to be placed on the highscores:";
+        endScreen.textContent = "Your Score is "+ timer;
+        
     }
     else{
+        cardPointer.append(endScreenHeader);
+        cardPointer.append(endScreen)
         endScreenHeader.textContent = "Time's up!";
         endScreen.textContent = "Better luck next time!";
         restartBtn.textContent = "Restart";
@@ -136,7 +139,13 @@ function startTimer(){                        // Start the timer at 120 seconds
     }, 1000);                                   // sets a 1 second interval
 }
 
-startBtn.addEventListener('click', startQuiz)
-restartBtn.addEventListener('click', function(){
+function postScore(){
+    console.log(highScoreForm.pname.value);
+    localStorage.setItem(highScoreForm.pname.value, playerScore);
+    location.reload();
+}
+
+startBtn.addEventListener('click', startQuiz)       // Event listener for the 'start quiz' button which runs the main script
+restartBtn.addEventListener('click', function(){    // Event listener for the restart button which reloads the page
     location.reload();
 })
