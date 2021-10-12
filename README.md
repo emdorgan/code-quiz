@@ -38,3 +38,7 @@ Just press the start quiz button to start the challenge!
 - [Link to Portfolio Site](https://emdorgan.github.io/portfolio/)
 - [Link to Github](https://github.com/emdorgan)
 - [Link to LinkedIn](https://www.linkedin.com/in/emily-dorgan/)
+
+## License
+
+This project is licensed under the MIT License

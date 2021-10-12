@@ -51,6 +51,20 @@ var answerArray = [
     ["arr.size", "arr.length", "arr.total", "arr.matey", "arr.length"]
 ];
 
+// var q = [
+//     {
+//         question:"this is some q?",
+//         answers:["",""],
+//         correct: ""
+//     },
+//     {
+//         question:"this is some q?",
+//         answers:["",""],
+//         correct: ""
+//     },
+// ]
+
+
 var countdown;                                                      // initializing countdown function variable globally for scope
 var timer = 120;                                                    // variable storing the timer
 var q = 0;                                                          // global variable that controls with set of questions and answers in the arrays are loaded.
